@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ globals.user_country.language | lower }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    {% block viewport %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+    <meta name="robots" content="index, follow">
+    <title>{{ page_title }} - {{ globals.store.name }}</title>
+    <link href="{{ asset('app.css') }}" rel="stylesheet">
+    {% block scripts_head %}{% endblock %}
+    {% block styles %}{% endblock %}
+</head>
+<body class="d-flex flex-column h-100">
+{% block content %}{% endblock %}
+<script>
+    window.csrf_token = '{{ csrf_token }}';
+    window.language = '{{ locale }}';
+    window.currency = '{{ globals.user_currency.code }}';
+    window.user_currency = {{ globals.user_currency | json_encode | raw }};
+    window.store_currency = {{ globals.store.currency | json_encode | raw }};
+    window.store_id = '{{ globals.store.id }}';
+    window.store_uuid = '{{ globals.store.uuid }}';
+    window.customer_id = {% if auth().check() %}'{{ auth().user.id }}'{% else %}null{% endif %};
+    window.cart_uuid = '{{ globals.cart.uuid }}';
+</script>
+<script type="text/javascript" src="{{ asset('app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
