@@ -1,5 +1,18 @@
 {
   "settings": {
     "index": "home.json"
+  },
+  "templates\/home.json": {
+    "sections": [
+      {
+        "id": "example.twig"
+      }
+    ],
+    "settings": {
+      "page_title": "Home",
+      "header": 1,
+      "footer": 1,
+      "layout": "base.twig"
+    }
   }
 }
